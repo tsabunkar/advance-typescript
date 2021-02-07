@@ -1,0 +1,23 @@
+{
+  "name": "advance-typescript",
+  "version": "1.0.0",
+  "description": "- TypeScript ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsabunkar/advance-typescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsabunkar/advance-typescript/issues"
+  },
+  "homepage": "https://github.com/tsabunkar/advance-typescript#readme",
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}

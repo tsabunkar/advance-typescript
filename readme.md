@@ -7,6 +7,7 @@
         class Employee {
           public int id;
         }
+        Employee emp = new Employee();
         emp.city = 'Bangalore'; // adding property at runtime (Dynamically/on-fly) <- which was not possible in java/C#
     ```
   - is loosely typed language
@@ -16,9 +17,42 @@
 - Whereas TypeScript by nature
   - is Strongly typed language
   - think typescript as an addon to js language i.e- Initially Typescript only sole purpose was to add type information to js. Thus you can say TypeScript extends JavaScript by adding types
+- Typescript uses tsc (typescript compiler) to compile down ts code -> js code
+  - ts code --> tsc --> js code --> browser/v8/node
+  - $ npm install typescript --save-dev
+- TypeScript-compatible transpilers:
+  - tools which convert TypeScript files to JavaScript files
+  - example : Babel, swc, and Sucrase
+- What is the importance of Typing in typescript?
+  - Types provide a way to describe the shape of an object.
+  - better documentation
+  - allow tsc to validate your ts code
+- TypeScript had now evolved more than Typing (which was its intital intention), various other features were added in typescript proj
+  - Enum, Interface, Classes, Lambda, Generics (this features are slowing getting adapted in js lang itself as-per es6, es7, .. esNext)
+- Beginners Note: If typescript is your first choice of language it is better to learn js first - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+- The main benefit of TypeScript is that it can highlight unexpected behavior in your code, lowering the chance of bugs
 
-## Basic Types
+## Basic Types in TypeScript
 
+- But before jumping to typescript, we should know already know that js language has 7 primitive data types: string, number, bigint, boolean, undefined, symbol, and null. (All primitives are immutable, i.e., they cannot be altered)
+  - Also all primitive values(except - null and undefined) have object equivalents that wrap around the primitive values i.e- String, Number, BigInt, Boolean, Symbol. We can use valueOf() method to returns the primitive value.
+- Now TypeScript extends this above list with a few more types i.e-
+  - any (allow anything)
+  - unknown (ensure someone using this type declares what type it is)
+  - never (it’s not possible that this type could happen/exist)
+  - void (a function which returns undefined or has no return value)
+  - For building your custom types we have 2 syntaxes: Interfaces and Types (recommended interface)
+- Difference between any v/s unknown
+  - any : can be assigned to any type of data and can recieve any type of data
+  - unknown : it cannot be assigned to any type of data
+  ```ts
+  let vAny: any = 10; // We can assign anything to any
+  let vUnknown: unknown = 10; // We can assign anything to unknown just like any
+  // ------------------
+  let s1: string = vAny; // ✅ Any is assignable to anything
+  let s2: string = vUnknown; //❌ Invalid we can't assign vUnknown to any other type (without an explicit assertion)
+  ```
+  - If you are from C# background, any is like dynamic and unknown is like object. I like unknown as it is just more type safe.
 - Boolean
 
 ```ts
