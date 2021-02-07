@@ -1,6 +1,21 @@
-# :rocket: :rocket: Let's Gear Up for TypeScript :tada: :tada:
+# :tada: Advance TypeScript :tada:
 
-TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. Any browser. Any host. Any OS. Open source.
+- TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. Any browser. Any host. Any OS. Open source.
+- JS by nature
+  - is dynamically typed language => (Object structure can evolve over the time i.e- Consider below Employee object/dto)
+    ```js
+        class Employee {
+          public int id;
+        }
+        emp.city = 'Bangalore'; // adding property at runtime (Dynamically/on-fly) <- which was not possible in java/C#
+    ```
+  - is loosely typed language
+    ```js
+    var name;
+    ```
+- Whereas TypeScript by nature
+  - is Strongly typed language
+  - think typescript as an addon to js language i.e- Initially Typescript only sole purpose was to add type information to js. Thus you can say TypeScript extends JavaScript by adding types
 
 ## Basic Types
 
