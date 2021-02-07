@@ -1,5 +1,10 @@
 - But before jumping to typescript, we should know already know that js language has 7 primitive data types: string, number, bigint, boolean, undefined, symbol, and null. (All primitives are immutable, i.e., they cannot be altered)
   - Also all primitive values(except - null and undefined) have object equivalents that wrap around the primitive values i.e- String, Number, BigInt, Boolean, Symbol. We can use valueOf() method to returns the primitive value.
+  ```ts
+  let s: String = 'Hello'; // ⚠️ Number, String, Boolean, Symbol and Object
+  //-> types do not refer to the language primitives, So should almost never should be used as a type
+  let s: string = 'Hello'; // ✅
+  ```
 - Now TypeScript extends this above list with a few more types i.e-
   - any (allow anything)
   - unknown (ensure someone using this type declares what type it is)
@@ -189,3 +194,18 @@ const loop = function () {
 - Object
 
 > object is a type that represents the non-primitive type (i.e- not number, string, boolean, bigint, symbol, null, or undefined.)
+
+---
+
+### Type assertions
+
+- It is a way you to tell the compiler “trust me, I know what I’m doing.” (i.e- As a developer/implementer I know the data-type of some entity)
+- It is like - Type Cast in other languages (java)
+
+```ts
+let someValue: unknown = 'this is a string';
+let strLength: number = (someValue as string).length;
+
+// “angle-bracket” syntax:
+let strLength2: number = (<string>someValue).length;
+```
