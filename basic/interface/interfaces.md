@@ -137,3 +137,7 @@ let mySquare = createSquare({ colour: 'red', width: 100 });
 ### Indexable Types
 
 - [Indexable-Types](./indexable-types.md)
+
+### More About interfaces
+
+- [Extending Interfaces, Hybrid Types](./more-interface.md)

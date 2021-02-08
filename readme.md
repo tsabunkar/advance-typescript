@@ -8,72 +8,11 @@
 
 ## Interfaces
 
-- [Interface](basic/interfaces.md)
+- [Interface](basic/interface/interfaces.md)
   - Basics of Interface as Types
-  - [Function-Types](basic/function-types.md)
-  - [Indexable-Types](basic/indexable-types.md)
-
-## Extending Interfaces
-
-Like classes, interfaces can extend each other. This allows you to copy the members of one interface into another, which gives you more flexibility in how you separate your interfaces into reusable components.
-
-```ts
-interface Shape {
-  color: string;
-}
-
-interface Square extends Shape {
-  sideLength: number;
-}
-
-let square = {} as Square;
-square.color = 'blue';
-square.sideLength = 10;
-
-square.borderWidth = 5; //❌
-```
-
-> An `interface` can extend multiple interfaces, creating a combination of all of the interfaces.
-
-```ts
-interface Shape {
-  color: string;
-}
-
-interface PenStroke {
-  penWidth: number;
-}
-
-interface Square extends Shape, PenStroke {
-  sideLength: number;
-}
-```
-
-## Hybrid Types
-
-As we mentioned earlier, interfaces can describe the rich types present in real world JavaScript. Because of JavaScript’s dynamic and flexible nature, you may occasionally encounter an object that works as a combination of some of the types described above.
-
-One such example is an object that acts as both a function and an object.
-
-```ts
-interface Counter {
-  (start: number): string;
-  interval: number;
-  reset(): void;
-}
-
-function getCounter(): Counter {
-  let counter = function (start: number) {} as Counter;
-  counter.interval = 123;
-  counter.reset = function () {};
-  return counter;
-}
-
-let c = getCounter();
-c(10);
-c.reset();
-c.interval = 5.0;
-```
+  - [Function-Types](basic/interface/function-types.md)
+  - [Indexable-Types](basic/interface/indexable-types.md)
+  - [Extending Interfaces, Hybrid Types](basic/interface/more-interface.md)
 
 ## Unions Types
 
