@@ -1,4 +1,5 @@
-- This is sometimes called “duck typing” or “structural typing”. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
+- This is sometimes called “duck typing” or “structural typing”.
+- In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
 
 ```ts
 function printLabel(labeledObj: { label: string }) {
@@ -47,7 +48,7 @@ function createSquare(config: SquareConfig): { color: string; area: number } {
 let mySquare = createSquare({ color: 'black' });
 ```
 
-> ReadOnly Properties
+> ReadOnly Properties : properties should only be modifiable when an object is first created
 
 ```ts
 interface Point {
@@ -59,7 +60,7 @@ interface Point {
 ```ts
 let p1: Point = { x: 10, y: 20 };
 
-p1.x = 5; //❌
+p1.x = 5; //❌ Cannot assign to 'x' because it is a read-only property.
 ```
 
 > TypeScript comes with a `ReadonlyArray<T>` type that is the same as `Array<T>` with all mutating methods removed.
@@ -86,7 +87,11 @@ let ro: ReadonlyArray<number> = a;
 a = ro as number[];
 ```
 
-> The easiest way to remember whether to use `readonly` or `const` is to ask whether you’re using it on a variable or a property. Variables use `const` whereas properties use `readonly`.
+~ ~ ~
+
+> 📝 **_NOTE:_** The easiest way to remember whether to use `readonly` or `const` is to ask whether you’re using it on a variable or a property. Variables use `const` whereas properties use `readonly`.
+
+~ ~ ~
 
 ```ts
 interface SquareConfig {
@@ -124,3 +129,11 @@ function createSquare(config: SquareConfig): { color: string; area: number } {
 
 let mySquare = createSquare({ colour: 'red', width: 100 });
 ```
+
+### Function Types
+
+- [Function-Types](./function-types.md)
+
+### Indexable Types
+
+- [Indexable-Types](./indexable-types.md)
