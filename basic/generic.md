@@ -76,3 +76,176 @@ function loggingIdentity<T>(arg: Array<T>): Array<T> {
 ```
 
 - How to read above loggingIdentity function i.e- loggingIdentity takes a type parameter T, and an argument arg which is an array of Ts, and returns an array of Ts.”
+
+### Generic Types
+
+- let us create generic interfaces
+
+```ts
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let myIdentity: <T>(arg: T) => T = identity;
+```
+
+---
+
+### Let us apply typesafe implementation of Array prototype functions
+
+- Array.prototype.map() : The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
+- Let us see how do we implement our own implementation of map() function
+
+```js
+const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map((x) => x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+```
+
+> What If we want to create our own/custom implementation of map function as mymap
+
+```js
+Array.prototype.mymap = function (callback) {
+  const resultArray = [];
+  // this refers to the array on whichmymap is done
+  for (let index = 0; index < this.length; index++) {
+    resultArray.push(callback(this[index], index, this)); // The function in the argument should be called for each value in the array with 3 arguments - current element, Current element's index, Entire Array
+  }
+  return resultArray;
+};
+
+[1, 2, 3].mymap((ele) => ele * 2); // [2, 4, 6]
+
+[1, 2, 3].mymap((ele, i, arr) => {
+  console.log('Element: ', ele, ' Index value: ', i, ' Source Array: ', arr);
+  return ele;
+});
+```
+
+> If above code is confusing let me simplify for you, just by taking source list as argument itself
+
+```ts
+function mymap(list, callback) {
+  const resultArray = [];
+  for (let index = 0; index < list.length; index++) {
+    resultArray.push(callback(list[index], index, list));
+  }
+  return resultArray;
+}
+
+console.log(mymap([1, 2, 3], (ele) => ele * 2)); // [2, 4, 6]
+```
+
+> Let us write its typesafe implementation for mymap function
+
+```ts
+function mymap<T, TResult>(
+  list: T[],
+  callback: (arg0: T, arg1: number, arg3: T[]) => TResult
+): TResult[] {
+  const resultArray: TResult[] = [];
+  for (let index = 0; index < list.length; index++) {
+    resultArray.push(callback(list[index], index, list));
+  }
+  return resultArray;
+}
+
+console.log(mymap([1, 2, 3], (ele) => ele * 2));
+```
+
+- Let us play with another Array prototype function - reduce()
+- Array.prototype.reduce() : reduce() method executes a reducer function (that you provide) on each element of the array, resulting in single output value
+
+```js
+const array1 = [1, 2, 3, 4];
+const reducerFn = (accumulator, currentValue) => accumulator + currentValue;
+// similar to
+const reducerFn2 = (accumulator, currentValue) => {
+  return (accumulator = accumulator + currentValue);
+};
+
+console.log(array1.reducerFn(reducer)); //  1 + 2 + 3 + 4 => 10
+```
+
+> custom implementation of reduce function as myreduce
+
+```ts
+function myreduce(list, reducerFn, initialVal) {
+  let resultArray = initialVal;
+  for (let currentItem of list)
+    resultArray = reducerFn(resultArray, currentItem);
+  return resultArray;
+}
+
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+myreduce([1, 2, 3, 4], reducer, 0);
+```
+
+> Let us write its typesafe implementation for myreduce function
+
+```ts
+function myreduce<T, TResult>(
+  list: T[],
+  reducerFn: (acc: TResult, curr: T) => TResult,
+  initialVal: TResult
+): TResult {
+  let resultArray: TResult = initialVal;
+  for (let currentItem of list)
+    resultArray = reducerFn(resultArray, currentItem);
+  return resultArray;
+}
+
+const reducer = (accumulator: number, currentValue: number) =>
+  accumulator + currentValue;
+console.log(myreduce([1, 2, 3, 4], reducer, 0));
+```
+
+- Have you heard about Array Utility function provided by loadash - zip()
+
+```ts
+const letters = ['a', 'b', 'c', 'd'];
+const nums = [3,1,5,2];
+zip(letters, nums)
+    => [
+        ['a', 3],
+        ['b', 1],
+        ['c', 5],
+        ....
+    ]
+
+```
+
+> zip impelementation
+
+```js
+function zip(list1, list2) {
+  const minLength = Math.min(list1.length, list2.length);
+  const result = [];
+  for (let index = 0; index < minLength; index++) {
+    result.push([list1[index], list2[index]]);
+  }
+  return result;
+}
+
+const letters = ['a', 'b', 'c', 'd'];
+const nums = [3, 1, 5, 2];
+
+console.log(zip(letters, nums));
+```
+
+> Let us write its typesafe implementation for zip function
+
+```ts
+function zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
+  const length = Math.min(list1.length, list2.length);
+  const result: [T1, T2][] = [];
+  for (let index = 0; index < length; index++) {
+    result.push([list1[index], list2[index]]);
+  }
+  return result;
+}
+```
