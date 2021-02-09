@@ -143,6 +143,7 @@ console.log(mymap([1, 2, 3], (ele) => ele * 2)); // [2, 4, 6]
 > Let us write its typesafe implementation for mymap function
 
 ```ts
+// Here In angle-bracket<> we are telling compiler that- all the types the mymap() functions can take
 function mymap<T, TResult>(
   list: T[],
   callback: (arg0: T, arg1: number, arg3: T[]) => TResult
