@@ -250,3 +250,135 @@ function zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
   return result;
 }
 ```
+
+### Generic Classes
+
+- generic class has a similar shape to a generic interface
+
+```ts
+class GenericNumber<T> {
+  zeroValue: T;
+  add: (x: T, y: T) => T;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0; // ✅ zeroValue property acting as number type here
+myGenericNumber.add = function (x, y) {
+  return x + y;
+};
+```
+
+```ts
+let stringNumeric = new GenericNumber<string>();
+stringNumeric.zeroValue = ''; // ✅ zeroValue property acting as string type here (no restricting, bcoz of Generic 🙏)
+stringNumeric.add = function (x, y) {
+  return x + y;
+};
+```
+
+### Type Constraints/ Generic Constraints
+
+- extends
+  - class inheritance
+  - Here in Typescript context this keyword is used for Generic Type
+
+```ts
+interface FormField<T extends number | string | boolean> {
+  // extends keyword to denote constraint -> on Generic type variable T
+  // Thus bcoz of this constraint FormField no longer work over any and all types but rather restricted to - number | string | boolean
+  value?: T;
+  defaultValue: T;
+  isValid: boolean;
+}
+
+function getFieldValue<T extends number | string | boolean>(
+  field: FormField<T>
+): T {
+  return field.value ?? field.defaultValue;
+}
+```
+
+### Using Type Parameters in Generic Constraints
+
+- Index Query Operator
+
+```ts
+export interface Bug {
+  id: number;
+  name: string;
+  isClosed: boolean;
+  createdAt: Date;
+  12: boolean;
+}
+
+const bug: Bug = {
+  id: 100,
+  name: 'Server communication failure',
+  isClosed: false,
+  createdAt: new Date(),
+  12: true,
+};
+
+type BugKeys = keyof Bug; // BugKeys <-- "attributes of the Bug type"
+// BugKeys = "id" | "name" | "isClosed" | "createdAt" | 12
+```
+
+> "attributes of the Bug type" means - BugKeys Can contain data-type that are attribute/property of Bug
+
+```ts
+const key1: BugKeys = 'id';
+const key2: BugKeys = 'createdAt';
+const key3: BugKeys = 12;
+```
+
+Let us see another example
+
+```ts
+function getAttribute(bug: Bug, attrName: string): any {
+  return bug[attrName];
+}
+```
+
+Let us make getAttribute() Generic Function not tight to only Bug Object
+
+```ts
+function getAttribute<T, TKey extends keyof T>( // TKey is constraint to only specific data-types --those are--> Attr/Prop of T Obj
+  bug: T,
+  attrName: TKey
+): T[TKey] {
+  return bug[attrName];
+}
+```
+
+~ ~ ~
+
+> 📝 **_DID U NOTICE:_**: Tkeys are Values which are Acting as Data-types
+
+~ ~ ~
+
+Let me explain : _*"Tkeys are Values which are Acting as Data-types"*_
+
+- wkt An Object prop/attr/keys --can be--> String / Number data types
+- If T is Object, then TKeys which containts (keyof T) which will contain all the keys/attr/prop of T as data-types (In UNION FASHION)
+- For example:
+  ```ts
+  type BugKeys = keyof Bug;
+  // BugKeys <-- Is not String or Number data-type, But specifc property name like - "id" | "name" | "isClosed" | "createdAt" | 12
+  // which are propertyNames/Keys of Bug Interface
+  ```
+- Now can I say --> Tkeys are Specifc property String/Number Values of Object 'T' which are Acting as Data-types
+
+Another Example
+
+```ts
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
+}
+
+let x = { a: 1, b: 2, c: 3, d: 4 };
+
+getProperty(x, 'a'); //  ✅
+getProperty(x, 'm'); // ❌ Argument of type '"m"' is not assignable to parameter of type '"a" | "b" | "c" | "d"'.
+```
+
+Thus this feature helps us -> we’re not accidentally grabbing a property that does not exist on the obj
