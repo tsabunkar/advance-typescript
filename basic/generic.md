@@ -251,6 +251,10 @@ function zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
 }
 ```
 
+- Wanna Practice More : Write Type Definition for all the utility functions provided by
+  - Array Prototype in JS
+  - Additional Utility functions provided by Lodash or Underscore.js
+
 ### Generic Classes
 
 - generic class has a similar shape to a generic interface
