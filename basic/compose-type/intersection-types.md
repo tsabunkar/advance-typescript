@@ -176,7 +176,23 @@ function processOrder(order: Order, orderAction: OrderState) {
 
 I know you are graving 😋 for last example, Okay as per your need 😝
 
-- Think you need to implement type which will has two property (done & value), done is boolean flag and value is Actual passed by consumer at run-time, how will you implement it?
+- Think you need to implement return type of Generator Function of JS
+- Just to re-call Generator function in JS ex-
+
+```ts
+function* generator(i) {
+  yield i;
+  yield i + 10;
+}
+
+const gen = generator(10);
+
+console.log(gen.next().value); // expected output: 10
+
+console.log(gen.next().value); // expected output: 20
+```
+
+Solution
 
 ```ts
 interface IteratorYieldResult<TResult> {
