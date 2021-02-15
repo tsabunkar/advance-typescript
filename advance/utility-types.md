@@ -1,4 +1,4 @@
-Typescript provided different utilities for type transformations
+Typescript provided different utilities for type transformations i.e-
 
 ### Partial<Type>
 

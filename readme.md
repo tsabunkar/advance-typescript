@@ -14,6 +14,12 @@
   - [Indexable-Types](basic/interface/indexable-types.md)
   - [Extending Interfaces, Hybrid Types](basic/interface/more-interface.md)
 
+## Compose Type
+
+- Compose Type are further divided into
+  - [Union-Types](basic/compose-type/union-types.md)
+  - [Intersection-Types](basic/compose-type/intersection-types.md)
+
 ## Generics
 
 - [Generic](basic/generic.md)
