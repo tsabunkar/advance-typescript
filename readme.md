@@ -18,6 +18,10 @@
 
 - [Generic](basic/generic.md)
 
+## Utility Types
+
+- [Utility](advance/utility-types.md)
+
 ## Miscellaneous Topics
 
 - [Miscellaneous](basic/other.md)
