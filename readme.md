@@ -28,6 +28,10 @@
 
 - [Utility](advance/utility-types.md)
 
+## Conditional Types
+
+- [Conditional](basic/conditional-types.md)
+
 ## Miscellaneous Topics
 
 - [Miscellaneous](basic/other.md)
