@@ -32,6 +32,10 @@
 
 - [Conditional](basic/conditional-types.md)
 
+## Decorators
+
+- [Decorators](advance/decorators/decorators.md)
+
 ## Miscellaneous Topics
 
 - [Miscellaneous](basic/other.md)

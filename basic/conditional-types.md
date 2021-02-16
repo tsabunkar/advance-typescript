@@ -226,7 +226,7 @@ const sayHelloNew = (name: string, age: number) =>
 
 type SayHelloNewParams = MyParameters<typeof sayHelloNew>;
 
-let x: SayHelloNewParams = ['Tejas', 26]; // let x: [name: string, age: number]
+let x: SayHelloNewParams; // let x: [name: string, age: number]
 ```
 
 Another Example
