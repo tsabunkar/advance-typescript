@@ -29,3 +29,29 @@
     set?(v: any): void;
   }
   ```
+
+- Property Descriptor:
+
+  - 'property descriptor' is an object which describes following attributes:
+    - value: The value of the property.
+    - writable: Can property be changed? (true/false).
+    - configurable: Can property be changed and deleted? (true/false).
+    - enumerable: Can property be looped over? (true/false).
+    - get: The corresponding getter method of the property. If there's no getter then it is undefined.
+    - set: The corresponding setter method of the property. If there's no setter then it is undefined.
+  - Example of `Object.getOwnPropertyDescriptor(object, property)` which returns a 'property descriptor'
+
+  ```js
+  const person = { name: 'Tejas' };
+  let propertyDescriptor = Object.getOwnPropertyDescriptor(person, 'name');
+  console.log(propertyDescriptor);
+  /* {
+    configurable: true // default values
+    enumerable: true
+    value: "Tejas"
+    writable: true
+    }
+  */
+  ```
+
+  - Example on get(), set()
