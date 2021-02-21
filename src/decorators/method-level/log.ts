@@ -1,4 +1,4 @@
-export function log(message) {
+export function log(message: string) {
   return function (
     target: Object /* prototype of the class */,
     propertyKey: string /* name of the method */,
