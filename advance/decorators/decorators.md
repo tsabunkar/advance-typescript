@@ -54,4 +54,25 @@
   */
   ```
 
-  - Example on get(), set()
+  - Ex of getOwnPropertyDescriptor using Employee Class
+
+  ```js
+  class Employee {
+    constructor(name, dept) {
+      this.name = name;
+      this.dept = dept;
+    }
+  }
+  let pd = Object.getOwnPropertyDescriptor(new Employee('Tejas', 'IT'), 'name');
+  console.log(pd);
+  /*  {
+      "value": "Tejas",
+      "writable": true,
+      "enumerable": true,
+      "configurable": true
+    } */
+  ```
+
+  - Decorators can be appiled to:
+    - Property/Method Level Decorator (src/decorators/method-level)
+    - Class Level Decorator (src/decorators/class-level)
